@@ -13,6 +13,7 @@ if _G.CanOpenCD == 'Y' or _G.CanOpenCD == nil then
     local UIListLayout = Instance.new("UIListLayout")
     local ImageLabel = Instance.new("ImageLabel") -- Image label for the decal
     local UserInputService = game:GetService("UserInputService") -- For platform detection
+    local SoundService = game:GetService("SoundService")
 
     ScreenGui.Parent = game.CoreGui
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -29,7 +30,7 @@ if _G.CanOpenCD == 'Y' or _G.CanOpenCD == nil then
 
     -- Add decal image to the entire frame
     ImageLabel.Parent = Frame
-    ImageLabel.Image = "rbxassetid://101659602"
+    ImageLabel.Image = "rbxassetid://123789158213235"
     ImageLabel.Size = UDim2.new(1, 0, 1, 0)
     ImageLabel.BackgroundTransparency = 0.8 -- Transparent background for the image
     ImageLabel.ImageTransparency = 0.3 -- Slight transparency for the image
@@ -44,16 +45,37 @@ DecalImage.Image = "rbxassetid://7092830551" -- Set the decal image ID
 DecalImage.BackgroundTransparency = 1 -- Make the background transparent
 DecalImage.ScaleType = Enum.ScaleType.Fit -- Fit the image within the label
 
+local clickSound = Instance.new("Sound")
+clickSound.SoundId = "rbxassetid://6042053626"
+clickSound.Parent = SoundService
 
+local function playClickSound()
+    clickSound:Play()
+end
+
+arts.MouseButton1Click:Connect(function()
+    playClickSound()
+    closeUI()
+end)
+
+clear.MouseButton1Click:Connect(function()
+    playClickSound()
+    closeUI()
+end)
+
+bucket.MouseButton1Click:Connect(function()
+    playClickSound()
+    closeUI()
+end)
 
     UICorner.CornerRadius = UDim.new(0, 10) -- Rounded corners
-    UICorner.Parent = Frame
+    UICorner.Parent = ImageLabel
     
     chat.Name = "chat"
     chat.Parent = Frame
     chat.BackgroundColor3 = Color3.fromRGB(55, 55, 55) -- Darker button color
     chat.BorderSizePixel = 0
-    chat.Position = UDim2.new(0.1, 0, 0.93, 0)
+    chat.Position = UDim2.new(0.07, 0, 0.93, 0)
     chat.Size = UDim2.new(0, 79, 0, 39)
     chat.Font = Enum.Font.SourceSans
     chat.Text = "Chat"
@@ -66,7 +88,7 @@ DecalImage.ScaleType = Enum.ScaleType.Fit -- Fit the image within the label
     clear.Parent = Frame
     clear.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
     clear.BorderSizePixel = 0
-    clear.Position = UDim2.new(0.75, 0, 0.93, 0)
+    clear.Position = UDim2.new(0.77, 0, 0.93, 0)
     clear.Size = UDim2.new(0, 79, 0, 39)
     clear.Font = Enum.Font.SourceSans
     clear.Text = "Clear"
@@ -92,7 +114,7 @@ DecalImage.ScaleType = Enum.ScaleType.Fit -- Fit the image within the label
     bucket.Parent = Frame
     bucket.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
     bucket.BorderSizePixel = 0
-    bucket.Position = UDim2.new(0.33, 0, 0.93, 0)
+    bucket.Position = UDim2.new(0.31, 0, 0.93, 0)
     bucket.Size = UDim2.new(0, 79, 0, 39)
     bucket.Font = Enum.Font.SourceSans
     bucket.Text = "Bucket Paint"
@@ -105,7 +127,7 @@ DecalImage.ScaleType = Enum.ScaleType.Fit -- Fit the image within the label
     arts.Parent = Frame
     arts.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
     arts.BorderSizePixel = 0
-    arts.Position = UDim2.new(0.53, 0, 0.93, 0) 
+    arts.Position = UDim2.new(0.55, 0, 0.93, 0) 
     arts.Size = UDim2.new(0, 79, 0, 39)
     arts.Font = Enum.Font.SourceSans
     arts.Text = "Arts"
@@ -318,10 +340,13 @@ arts.MouseButton1Click:Connect(function()
     artsFrame.Draggable = true
 
     ImageLabel.Parent = artsFrame
-    ImageLabel.Image = "rbxassetid://101659602"
+    ImageLabel.Image = "rbxassetid://108903535762663"
     ImageLabel.Size = UDim2.new(1, 0, 1, 0)
     ImageLabel.BackgroundTransparency = 1
-    ImageLabel.ImageTransparency = 0.1
+    ImageLabel.ImageTransparency = 0
+
+    UICorner.CornerRadius = UDim.new(0, 10) -- Rounded corners
+    UICorner.Parent = artsFrame
 
     ScrollingFrame.Parent = artsFrame
     ScrollingFrame.Active = true
@@ -330,7 +355,7 @@ arts.MouseButton1Click:Connect(function()
     ScrollingFrame.BorderSizePixel = 0
     ScrollingFrame.Position = UDim2.new(0.1, 0, 0.1, 0)
     ScrollingFrame.Size = UDim2.new(0.9, 0, 0.8, 0)
-    ScrollingFrame.CanvasSize = UDim2.new(0, 0, 5.5, 0)
+    ScrollingFrame.CanvasSize = UDim2.new(0, 0, 8, 0)
     ScrollingFrame.ScrollBarThickness = 35
 
     UIListLayout.Parent = ScrollingFrame
@@ -448,32 +473,36 @@ arts.MouseButton1Click:Connect(function()
         [10] = Color3.fromRGB(255, 190, 180) -- Pale
     }
 
-    local emojiArts = {
-        "⬜️⬛️⬛️⬜️⬛️⬛️⬜️\n⬛️🔴🔴⬛️🔴🔴⬛️\n⬛️🔴🔴🔴🔴🔴⬛️\n⬛️🔴🔴🔴🔴🔴⬛️\n⬜️⬛️🔴🔴🔴⬛️⬜️\n⬜️⬜️⬛️🔴⬛️⬜️⬜️\n⬜️⬜️⬜️⬛️⬜️⬜️⬜️",
-        "⬜️🔵⬜️🔵🔴🔴🔴\n🔵⬜️🔵🔵⬜️⬜️⬜️\n🔵🔵🔵🔵🔴🔴🔴\n⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n🔴🔴🔴🔴🔴🔴🔴\n⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n🔴🔴🔴🔴🔴🔴🔴",
-        "⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n🔵🔵🔵🔵🔵🔵🔵\n🔵🔵🔵🔵🔵🔵🔵\n🔵🔵🔵🔵🔵🔵🔵\n🔴🔴🔴🔴🔴🔴🔴\n🔴🔴🔴🔴🔴🔴🔴",
-        "⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n⬜️🔵🔵🔵🔵🔵⬜️\n⬜️🔵🔵🔵🔵🔵⬜️\n⬜️⬜️🔵🔵🔵⬜️⬜️\n⬜️⬜️⬜️🔵⬜️⬜️⬜️\n⬜️⬜️⬜️⬜️⬜️⬜️⬜️",
-        "⬛️⬛️⬛️⬛️⬛️⬛️⬛️\n⬛️⬛️⬜️⬛️⬛️⬜️⬛️\n⬛️⬛️⬜️⬛️⬜️⬛️⬛️\n⬛️⬛️⬜️⬜️⬛️⬛️⬛️\n⬛️⬛️⬜️⬛️⬜️⬛️⬛️\n⬛️⬛️⬜️⬛️⬛️⬜️⬛️\n⬛️⬛️⬛️⬛️⬛️⬛️⬛️",
-        "⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n⬜️⬜️⬛️⬛️⬛️⬜️⬜️\n⬜️⬛️⬜️⬜️⬜️⬛️⬜️\n⬛️⬜️⬜️🔴⬜️⬜️⬛️\n⬜️⬛️⬜️⬜️⬜️⬛️⬜️\n⬜️⬜️⬛️⬛️⬛️⬜️⬜️\n⬜️⬜️⬜️⬜️⬜️⬜️⬜️",
-        "💿💿💿💿💿💿💿\n💿💿⬜️⬜️⬜️⬜️⬜️\n💿⬜️⬜️⬜️⬜️⬜️⬜️\n⬜️💿💿⬜️💿💿⬜️\n⬜️⬜️⬜️💿⬜️⬜️⬜️\n⬜️💿💿💿💿💿⬜️\n⬜️⬜️⬜️⬜️⬜️⬜️⬜️",
-        "⬛️⬛️⬛️⬛️⬛️⬛️⬛️\n⬛️⬛️⬜️⬜️⬜️⬜️⬛️\n⬛️⬛️⬜️⬛️⬛️⬛️⬛️\n⬛️⬛️⬜️⬜️⬜️⬛️⬛️\n⬛️⬛️⬜️⬛️⬛️⬛️⬛️\n⬛️⬛️⬜️⬛️⬛️⬛️⬛️\n⬛️⬛️⬛️⬛️⬛️⬛️⬛️",
-        "⬛️⬛️⬛️⬛️🏀⬛️🏀\n⬛️⬜️⬜️⬜️⬛️🏀⬛️\n⬜️⬛️⬛️⬛️🏀⬛️🏀\n⬛️⬜️⬜️⬜️⬛️⬛️⬛️\n⬛️⬛️⬛️⬛️⬜️⬛️⬛️\n⬛️⬜️⬜️⬜️⬛️⬛️⬛️\n⬛️⬛️⬛️⬛️⬛️⬛️⬛️",
-        "🔴🔴🔴🔴🔴🔴🔴\n🔴🔴🔴🔴🔴🔴🔴\n🔴⬜️⬜️⬜️⬜️⬜️🔴\n🔴⬜️⬜️⬜️⬜️🔴🔴\n🔴⬜️⬜️⬜️🔴🔴🔴\n🔴🔴🔴🔴🔴🔴🔴\n🔴🔴🔴🔴🔴🔴🔴"
+    local ImageArts = {
+        "rbxassetid://113313584159710",
+        "rbxassetid://137220557235955",
+        "rbxassetid://97676465496244",
+        "rbxassetid://106500366170809",
+        "rbxassetid://93301771687953",
+        "rbxassetid://99842564295358",
+        "rbxassetid://104870392009625",
+        "rbxassetid://102915513172544",
+        "rbxassetid://112465920150030",
+        "rbxassetid://127760782784440"
     }
 
-    -- Add Art Buttons to ScrollingFrame
-    for i, art in pairs(artsList) do
-        local artButton = Instance.new("TextButton")
-        artButton.Parent = ScrollingFrame
-        artButton.Size = UDim2.new(0.9, 0, 0.1, 0)
-        artButton.BackgroundColor3 = Color3.fromRGB(85, 85, 85)
-        artButton.Text = emojiArts[i] or "Art " .. i -- Use emojiArts for button text
-        artButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-        artButton.TextScaled = true
-        artButton.TextWrapped = true
-        artButton.TextXAlignment = Enum.TextXAlignment.Center
-        artButton.TextYAlignment = Enum.TextYAlignment.Center
-        artButton.Font = Enum.Font.SourceSans
+-- Add Art Buttons to ScrollingFrame
+for i, art in pairs(artsList) do
+    local artButton = Instance.new("TextButton")
+    artButton.Parent = ScrollingFrame
+    artButton.Size = UDim2.new(0.85, 0, 0.097, 0)
+    artButton.BackgroundColor3 = Color3.fromRGB(85, 85, 85)
+    artButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    artButton.Text = "Loading..."
+
+        -- Add image if needed
+    if ImageArts[i] then
+        local imageLabel = Instance.new("ImageLabel", artButton)
+        imageLabel.Image = ImageArts[i]
+        imageLabel.Size = UDim2.new(0.9, 0, 0.9, 0)
+        imageLabel.Position = UDim2.new(0.05, 0, 0.05, 0)
+        imageLabel.BackgroundTransparency = 1
+    end
 
         -- Clone UICorner for each button
         local buttonUICorner = UICorner:Clone()
